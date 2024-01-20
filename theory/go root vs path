@@ -1,0 +1,53 @@
+- GOROOT is an environment variable that specifies the location where the Go SDK is installed.
+This is the directory where Go's standard library, compiler, and other tools are located.
+
+- GOPATH
+Definition: GOPATH is an environment variable that specifies the root of your workspace where you develop Go projects. It's where your own Go code, as well as third-party packages (external libraries), are stored.
+Workspace Structure: A typical GOPATH contains three directories: src (source files), pkg (package objects), and bin (compiled binaries).
+src: Contains Go source files organized into packages.
+pkg: Contains package objects.
+bin: Contains the compiled executable programs.
+Importance for Developers: Before Go modules were introduced, GOPATH was essential for the Go toolchain to locate Go packages and dependencies. It was the central location for storing all Go code.
+Go Modules: With the introduction of Go modules (since Go 1.11), the dependency on GOPATH has reduced.
+Go modules allow for versioned dependency management and enable you to build Go projects outside of the GOPATH.
+However, GOPATH is still used for storing installed binaries and non-module-based projects.
+
+
+
+Go Modules - An Overview
+Versioned Dependency Management: Go modules allow developers to specify and manage versioned dependencies for their Go projects.
+This system handles the downloading, installing, and referencing of external libraries.
+
+Project-Based Workflow: With Go modules, each Go project can have its own dependencies, which are tracked in a go.mod file at the root of the project.
+This file declares the module's path and its dependency requirements.
+
+No Need for GOPATH Structure: A project using Go modules can be located outside of the GOPATH.
+This means you're not required to follow the traditional GOPATH/src directory structure. You can organize and store your Go projects anywhere on your filesystem.
+
+Impact on GOPATH
+Reduced Role: With modules, the GOPATH is no longer the central workspace for Go development.
+ While GOPATH is still used for storing installed Go binaries (GOPATH/bin) and for legacy projects not using modules, it's not mandatory for new projects.
+
+Flexible Project Locations: Developers can now work on Go projects in any directory on their system, not just within GOPATH/src.
+This flexibility allows for more standard project layouts, especially in multi-language development environments.
+
+Simplified Dependency Management: Dependencies for a Go project are now explicitly defined and versioned in the go.mod file, making it easier to manage and understand a project's dependencies.
+This system also ensures reproducible builds by using specific versions of dependencies
+
+
+
+GO111MODULE Environment Variable:
+Module Mode: In module-based projects, the behavior of the Go toolchain is influenced by the GO111MODULE environment variable, which can have one of three values: auto, on, or off.
+auto (default): This mode automatically enables modules for projects located outside the GOPATH. Inside the GOPATH, it still follows the traditional non-module behavior.
+on: Modules are enabled for all projects, both inside and outside the GOPATH.
+off: Modules are disabled, and the Go toolchain reverts to the pre-Go 1.11 behavior.
+
+
+improved Dependency Management: Enabling vendor support is particularly useful when you want to ensure that your project uses a specific version of a dependency,
+  even if other versions of the same dependency are installed globally on your system. It helps in creating reproducible builds.
+
+
+Module-Based Approach:
+
+If you are working in a module-based project (with Go modules enabled), go install compiles the package and places the resulting binary executable in the bin directory within your module cache.
+The module cache is managed by Go itself and is separate from the GOPATH. The module cache location depends on your Go version and operating system. It's usually located in the system-specific cache directory.

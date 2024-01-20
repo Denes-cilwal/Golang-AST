@@ -1,0 +1,26 @@
+The compiled code of a Go program can run on another machine if the target machine has the same operating system and architecture for which the code was compiled.
+ Go's ability to create standalone executables makes this process straightforward under these conditions.
+ However, if you need to run the Go program on a different platform (different OS or architecture), you have to use cross-compilation. Here's how it works:
+
+Running on the Same Platform
+If you compile a Go program on a 64-bit Windows machine,
+the resulting executable will run on any other 64-bit Windows machine without needing the Go runtime or any other dependencies installed.
+
+This is because the Go compiler statically links all dependencies, including the Go runtime, into the executable.
+
+Cross-Compilation for Different Platforms
+Go supports cross-compilation, which allows you to compile your program for a different platform than the one you are currently using.
+For instance, you can compile a Go program on a macOS machine for a Linux-based system, or compile on an x86 architecture machine for an ARM architecture.
+
+How to Cross-Compile in Go:
+Set Target OS and Architecture: Before compiling, set the GOOS and GOARCH environment variables to match the target platform.
+GOOS refers to the operating system (like linux, windows, darwin for macOS), and GOARCH refers to the architecture (like amd64, arm64, etc.).
+
+Compile the Program: Run the go build command to compile the program for the specified platform.
+
+Example of Cross-Compilation:
+Suppose you're on a macOS machine (darwin/amd64) and want to compile a program for a Linux server running on an AMD64 processor. You would set the environment variables and compile like this:
+
+
+GOOS=linux GOARCH=amd64 go build -o myprogram
+This command creates an executable (myprogram) that can run on a Linux AMD64 machine

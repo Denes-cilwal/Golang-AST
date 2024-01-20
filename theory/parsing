@@ -1,0 +1,72 @@
+ - In the context of  programming, parsing is used to understand the syntax of the code
+ - the go compiler parses the go code to understand its structure and syntax before compiling it to some executable form
+ - During parsing, syntax errors or format inconsistencies can be detected. For example, if your Go program is trying to parse a
+ - JSON string and the string is not properly formatted as JSON, the parsing process will fail, and you can handle this error accordingly.
+
+Process -
+ Source Code as Input: The process starts with the source code you've written in Go.
+ This code is just a text file with a series of characters that follows the syntax rules of the Go language.
+
+ Lexical Analysis: Before actual parsing, the compiler performs lexical analysis.
+ In this phase, the compiler reads the characters of the source code and groups them into meaningful sequences called tokens.
+  Tokens are the basic building blocks of a language's syntax, like keywords, identifiers, literals, and operators.
+
+ Parsing: Once the source code is tokenized, the next step is parsing. In this phase, the compiler uses the tokens to build a data structure called an abstract syntax tree (AST).
+ The AST is a tree representation of the syntactic structure of the source code. Each node in the tree represents a construct occurring in the source code.
+
+ For example, an if-else statement in your code will be represented as a branch in this tree, with sub-branches for the condition, the 'if' block, and the 'else' block.
+ Syntax Checking: During the parsing phase, the compiler checks the code for syntax errors. If the code doesn't follow the correct syntax rules of the language (for instance, if parentheses are unbalanced or keywords are misspelled), the compiler will generate an error and typically stop the compilation process.
+
+ Building Internal Representation[IR]: The AST is an internal representation of the program. It's more abstract than the source code but more concrete than machine code.
+ The AST reflects the hierarchical syntactic structure of the program and is used in subsequent phases of compilation.
+
+ Further Compilation Phases: After parsing, the compiler proceeds with further phases like semantic analysis (where it checks for semantic errors and infers types),
+ optimization (where it improves the code without changing its behavior), and code generation (where it finally converts the AST into executable machine code).
+
+ Code Generation:
+ The optimized IR is then translated into machine code, the binary instructions that the computer's processor understands. This translation is specific to the target CPU architecture (like x86, ARM).
+ The machine code is typically generated in the form of an object file, which is a binary representation of the compiled code.
+
+ Linking (Static in Go):
+Go statically links its libraries and dependencies into the binary executable. This means all the necessary library code is included in the executable file, creating a self-contained program.
+The compiler includes the Go runtime in the binary, which handles features like garbage collection, concurrency, and other runtime services.
+
+ Output:
+The output of the Go compilation process is a binary executable file. This file contains the machine code, which can be directly executed by the CPU.
+
+ Execution:
+When you run the executable file, the operating system loads this machine code into memory, and the CPU executes it.
+
+Go Compiler:
+
+The Go compiler is a program that takes your Go source code and translates it into machine code that the computer's CPU can execute.
+In Go, the primary compiler is typically referred to as gc (Go compiler), which is part of the standard Go distribution.
+
+
+ More Abstract than Source Code:
+ Source Code: This is the code that programmers write. It's in a human-readable form, using the syntax and keywords of a specific programming language (like Go, Python, Java, etc.). Source code includes not only the logical structures and algorithms but also elements like comments, whitespaces, and syntactic sugar, which make the code more readable and maintainable for humans.
+ AST: When the source code is converted into an AST, some of these human-centric elements are stripped away. The AST focuses on the logical and syntactical structure of the code, representing it as a tree of elements (like loops, conditionals, function calls, etc.). This representation is more abstract in the sense that it omits certain human-friendly details and distills the code down to its essential structure.
+
+ More Concrete than Machine Code:
+ AST: While the AST abstracts away some aspects of the source code, it still retains a high-level understanding of what the code is meant to do. It keeps the constructs and logic of the language intact, represented in a structured and hierarchical form.
+ Machine Code: This is the lowest-level representation of the program, consisting of binary instructions that can be directly executed by the computer's CPU. Machine code is highly specific to the hardware architecture and does not retain the high-level constructs of the programming language.
+ It is a concrete implementation in the sense that it's what actually runs on the hardware, but it's far removed from the human-friendly abstractions of the source code or the AST.
+
+
+go run main.go:
+
+When you use go run, the Go toolchain compiles the specified file(s) into an executable binary.
+However, instead of leaving the executable in your file system, go run immediately executes it. This is convenient for quick tests and development.
+The binary file is usually created in a temporary directory, and it's removed after the program finishes running.
+go build main.go:
+
+On the other hand, go build compiles the file(s) into an executable binary and saves it in your current directory (or the directory specified with the -o option).
+The generated executable file persists after the program finishes running, allowing you to reuse it without recompiling.
+This is useful for deploying the application or when you want a standalone executable.
+
+
+standalone executables are typically platform-dependent.
+This means that an executable compiled for one operating system or architecture is generally not compatible with another. Here are the key points about this dependency:
+
+Operating System Specific: Executables are built for specific operating systems (OS). An executable compiled for Windows won't run natively on macOS or Linux, and vice versa.
+ This is because different operating systems have different system calls, file systems, and ways of handling processes and memory.

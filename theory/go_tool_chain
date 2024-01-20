@@ -1,0 +1,34 @@
+The "Go toolchain" refers to a collection of tools provided with the Go programming language installation that are used for various stages of Go program development and management.
+These tools are essential for tasks like writing, formatting, compiling, testing, and managing Go code. The key components of the Go toolchain include:
+
+go command: This is the central command for managing Go source code. It provides numerous subcommands such as:
+
+go build: Compiles Go programs.
+go run: Compiles and runs Go programs.
+go test: Runs tests on Go packages.
+go get: Adds dependencies to current module and installs them.
+go mod: Module maintenance.
+go fmt: Formats Go source code.
+go doc: Shows documentation for a package or symbol.
+go install: Compiles and installs Go packages and dependencies.
+go clean: Removes object files and cached files.
+Compiler (gc): The Go compiler translates Go source code into executable binaries. This is a key part of the toolchain and is involved in commands like go build and go run.
+
+Linker: After the Go compiler compiles the source code, the linker combines the compiled packages into an executable binary.
+ The Go linker handles tasks like resolving package dependencies and creating a standalone executable.
+
+
+Runtime: The Go runtime is part of the toolchain that provides support for essential features such as goroutines (for concurrency), garbage collection, and interface type checks.
+eThe runtime is included in every Go executable
+
+
+Linker
+Combining Object Files: If your program consists of multiple source files, the compiler generates an object file for each.
+The linker combines these separate object files into a single executable file.
+
+Resolving References: Your code might have function calls or references to variables that are defined in different source files.
+The linker resolves these references. For instance, if file A calls a function defined in file B, the linker makes sure this call is correctly set up in the executable
+
+Imagine you're building a puzzle. Each piece of the puzzle is like an object file created by the compiler.
+The linker's job is to put all these puzzle pieces (object files) together to form the complete picture (the executable program).
+It makes sure that each piece is in the right place and connects correctly with the other pieces.
